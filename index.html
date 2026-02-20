@@ -1,17 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Scrollable Frame Animation</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jerush Thanusha | Resume Portfolio</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: #0f172a;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* Background Animation Canvas */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.08; /* watermark effect */
+}
+
+/* Main Container */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+    padding: 60px 0;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 100px 0 60px;
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+header p {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: #94a3b8;
+}
+
+.links a {
+    color: #38bdf8;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+section {
+    margin-bottom: 70px;
+}
+
+section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    border-left: 4px solid #38bdf8;
+    padding-left: 10px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    backdrop-filter: blur(5px);
+}
+
+ul {
+    margin-left: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 40px 0;
+    color: #94a3b8;
+}
+</style>
 </head>
+
 <body>
 
-    <div class="scroll-container">
-        <canvas id="animationCanvas"></canvas>
+<canvas id="bg-canvas"></canvas>
+
+<header>
+    <h1>T. Jerush Thanusha</h1>
+    <p>ECE Student | AI-Driven IoT Systems | Intelligent Communication Networks</p>
+    <div class="links">
+        <a href="mailto:jerushthanusha@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/jerush-thanusha-871188291" target="_blank">LinkedIn</a>
+        <a href="https://github.com/Jerush16" target="_blank">GitHub</a>
+    </div>
+</header>
+
+<div class="container">
+
+<section>
+    <h2>Professional Summary</h2>
+    <div class="card">
+        3rd-year Electronics and Communication Engineering student at Government College of Engineering, Tirunelveli (CGPA: 8.44). 
+        Focused on AI-driven IoT systems, embedded technologies, and intelligent communication networks. 
+        Interested in building scalable systems integrating AI with real-world hardware and networking infrastructure.
+    </div>
+</section>
+
+<section>
+    <h2>Education</h2>
+    <div class="card">
+        <strong>B.E. Electronics and Communication Engineering</strong><br>
+        Government College of Engineering, Tirunelveli<br>
+        CGPA: 8.44
     </div>
 
-    <script src="script.js"></script>
+    <div class="card">
+        12th Standard: 571/600<br>
+        10th Standard: 490/500<br>
+        St. Joseph Convent Higher Secondary School, Nagercoil
+    </div>
+</section>
+
+<section>
+    <h2>Technical Skills</h2>
+    <div class="card">
+        <ul>
+            <li><strong>Programming:</strong> Python, C/C++, Basic SQL</li>
+            <li><strong>AI/ML:</strong> NumPy, Pandas, Scikit-learn, Data Preprocessing, Model Evaluation</li>
+            <li><strong>Embedded & IoT:</strong> Microcontroller Design, Sensor Integration, Alert Systems</li>
+            <li><strong>Networking:</strong> OSI Model, TCP/IP Fundamentals, Basic Routing</li>
+            <li><strong>Tools:</strong> VS Code, Git, GitHub, MATLAB</li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2>Projects</h2>
+
+    <div class="card">
+        <strong>Anti-Sleep Vibrator Alarm System</strong>
+        <p>
+        Designed a wearable alert system to detect driver drowsiness and trigger vibration alerts to prevent fatigue-related accidents.
+        Integrated embedded hardware and real-time alert logic.
+        </p>
+    </div>
+
+    <div class="card">
+        <strong>Offline & Online WhatsApp Medibot for Rural Healthcare</strong>
+        <p>
+        Developing a hybrid chatbot system accessible online and offline to support healthcare guidance in rural areas.
+        Focused on lightweight communication design and AI-based interaction logic.
+        </p>
+    </div>
+</section>
+
+<section>
+    <h2>Internship Experience</h2>
+    <div class="card">
+        <strong>IPCS Global – Industrial Automation Intern</strong>
+        <p>
+        Worked with PLC systems, industrial automation workflows, and control system fundamentals.
+        Gained understanding of real-world automation logic and industrial process integration.
+        </p>
+    </div>
+</section>
+
+<section>
+    <h2>Certifications</h2>
+    <div class="card">
+        <ul>
+            <li>Harvard Course Certification</li>
+            <li>Industrial Automation Internship Certification</li>
+            <li>UI/UX Design Courses</li>
+        </ul>
+    </div>
+</section>
+
+</div>
+
+<footer>
+    © 2026 T. Jerush Thanusha | Portfolio
+</footer>
+
+<script>
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const frameCount = 240;
+const images = [];
+let currentFrame = 0;
+
+function pad(num) {
+    return num.toString().padStart(3, '0');
+}
+
+for (let i = 1; i <= frameCount; i++) {
+    const img = new Image();
+    img.src = `frames/ezgif-frame-${pad(i)}.jpg`;
+    images.push(img);
+}
+
+function drawFrame(index) {
+    if (images[index].complete) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(images[index], 0, 0, canvas.width, canvas.height);
+    }
+}
+
+window.addEventListener('scroll', () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollFraction = scrollTop / maxScroll;
+    currentFrame = Math.min(
+        frameCount - 1,
+        Math.floor(scrollFraction * frameCount)
+    );
+    drawFrame(currentFrame);
+});
+
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    drawFrame(currentFrame);
+});
+
+images[0].onload = () => drawFrame(0);
+</script>
+
 </body>
 </html>
