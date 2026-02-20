@@ -16,12 +16,12 @@
 }
 
 body {
-    background: linear-gradient(to bottom, #0f172a, #0b1120);
+    background: #0b1120; /* Removed heavy gradient */
     color: #ffffff;
     overflow-x: hidden;
 }
 
-/* === Background Canvas === */
+/* ===== Background Canvas ===== */
 #bg-canvas {
     position: fixed;
     top: 0;
@@ -29,12 +29,22 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
-    opacity: 0.22; /* More visible */
-    mix-blend-mode: screen;
-    filter: brightness(1.3) contrast(1.15);
+
+    opacity: 0.4; /* Much clearer */
+    mix-blend-mode: lighten;
+    filter: brightness(1.8) contrast(1.4) saturate(1.3);
 }
 
-/* === Layout === */
+/* Optional subtle overlay to balance brightness */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(10,15,30,0.35);
+    z-index: -1;
+}
+
+/* ===== Layout ===== */
 .container {
     width: 90%;
     max-width: 1100px;
@@ -55,7 +65,7 @@ header h1 {
 header p {
     margin-top: 12px;
     font-size: 1.2rem;
-    color: #94a3b8;
+    color: #cbd5e1;
 }
 
 .links a {
@@ -76,19 +86,20 @@ section h2 {
     padding-left: 12px;
 }
 
-/* Glass Cards */
+/* ===== Glass Cards (Lighter) ===== */
 .card {
-    background: rgba(255, 255, 255, 0.06);
-    padding: 22px;
-    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.45); /* Reduced darkness */
+    padding: 24px;
+    border-radius: 16px;
     margin-bottom: 20px;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     transition: transform 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
 }
 
 ul {
@@ -243,6 +254,7 @@ function drawFrame(index) {
     const x = (canvas.width / 2) - (img.width / 2) * scale;
     const y = (canvas.height / 2) - (img.height / 2) * scale;
 
+    ctx.globalAlpha = 0.9; /* Boost internal brightness */
     ctx.drawImage(
         img,
         x,
